@@ -13,6 +13,11 @@ public class Problem12 {
     }
 
     private static long numberOfDivisors(long n) {
-        return LongStream.range(2, n).parallel().filter(i -> n % i == 0).count() + 2;
+        if (n < 0) {throw new IllegalArgumentException();}
+        if (n <= 2) {return n;}
+        long sqrt = (long) Math.sqrt(n);
+        boolean perfectSquare = sqrt * sqrt == n;
+        long factors = LongStream.range(2, sqrt + 1).filter(i -> n % i == 0).count();
+        return perfectSquare ? (factors * 2) + 1 : (factors * 2) + 2;
     }
 }
