@@ -5,12 +5,13 @@ import java.util.stream.LongStream;
 
 public class Problem3 {
 
-    private static boolean isPrime(Long input) {
+    protected static boolean isPrime(Long input) {
         Objects.requireNonNull(input);
-        if(input == 1) {return true;}
         if(input <= 0) {throw new IllegalArgumentException("Please pass positive non zero number");}
+        if(input <= 3) {return true;}
+        if(input == 4) {return false;} //For 4 the sqrt is 2 and needs to be handled separately
         long squareRoot = (long) Math.ceil(Math.sqrt(input));
-        OptionalLong biggestFactor = LongStream.range(2, squareRoot).filter(i -> input % i == 0).findFirst();
+        OptionalLong biggestFactor = LongStream.range(2, squareRoot+1).filter(i -> input % i == 0).findFirst();
         return !biggestFactor.isPresent();
     }
 
