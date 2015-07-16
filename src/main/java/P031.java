@@ -15,8 +15,10 @@ public final class P031 {
 
         for (int i = 0; i < coinSizes.length; i++) {
             for (int j = coinSizes[i]; j <= target; j++) {
-                System.out.println(String.format("i=%s, w[%s] += w[%s], w[%s] = %s", i, j, (j-coinSizes[i]), (j-coinSizes[i]), ways[j-coinSizes[i]]));
+                System.out.println(String.format("i=%s, w[%s] += w[%s] => %s + %s", i, j, (j-coinSizes[i]), ways[j], ways[j-coinSizes[i]]));
+
                 ways[j] += ways[j - coinSizes[i]];
+
             }
         }
         System.out.println(ways[ways.length-1]);
