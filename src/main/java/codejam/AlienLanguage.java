@@ -1,6 +1,5 @@
 package codejam;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -51,13 +50,8 @@ public class AlienLanguage {
             (dict, input) -> dict.stream().filter(dictLine -> isPermutation.apply(dictLine, input)).count();
 
     public static void main(String[] args) throws Exception {
-        decode("inputs1.txt");
-    }
-
-    private static void decode(String fileName) throws IOException {
-        List<String> inputs = Files.readAllLines(Paths.get(fileName));
-        String[] ldn = inputs.get(0).split(" ");
-        int l = Integer.valueOf(ldn[0]), d = Integer.valueOf(ldn[1]), n = Integer.valueOf(ldn[2]);
+        List<String> inputs = Files.readAllLines(Paths.get("inputs1.txt"));
+        int d = Integer.valueOf(inputs.get(0).split(" ")[1]);
         List<String> dictionary = inputs.subList(1, d + 1);
         List<List<String>> patterns = inputs.subList(d + 1, inputs.size()).stream()
                 .map(splitter)
@@ -66,4 +60,5 @@ public class AlienLanguage {
             System.out.println("Case #" + (i+1) + ": " + permutationCount.apply(dictionary, patterns.get(i)));
         }
     }
+
 }
